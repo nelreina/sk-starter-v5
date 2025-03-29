@@ -28,9 +28,6 @@ export const login = async (username, password, cookies) => {
 		if (!user) {
 			throw new Error("Invalid username or password");
 		}
-		if (user.record.role !== "MEMBER") {
-			throw new Error("Invalid username or password");
-		}
 		const authData = { ...user.record, token: user.token };
 		await createSession(authData, cookies);
 		return authData;
