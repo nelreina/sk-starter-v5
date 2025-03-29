@@ -23,7 +23,7 @@ Check pocketbase online docs how to setup pocketbase admin user.
 ```sh
 # -- Use degit  
 pnpm add degit -g 
-degit <this repo> my-project-name
+degit https://github.com/nelreina/sk-starter-v5.git my-project-name
 
 pnpm dlx jsr add @nelreina/redis-client
 
