@@ -38,26 +38,21 @@ export const login = async (username, password, cookies) => {
 };
 
 export const createSession = async (authUser, cookies) => {
-	// Use node crypto to generate a random token
 	try {
 		const token = crypto.randomUUID();
 		await saveSession(token, authUser);
-		console.log("LOG:  ~ file: sessions.js:37 ~ token:", token);
-		// const token = Math.random().toString(36).slice(2);
 		cookies.set(cookieName, token, {
 			httponly: true,
 			sameSite: "lax",
 			path: "/",
-			maxAge: 86400, // 1 day
-			// Secure when in production
-			// secure: import.meta.env.PROD ? true : false,
-			secure: false,
+			maxAge: SESSION_EXPIRED, 
+			secure: import.meta.env.PROD ? true : false,
 		});
 	} catch (error) {
 		console.log(error);
-		// throw new Error("Failed to create session");
 	}
 };
+
 
 export const getToken = (cookies) => {
 	return cookies.get(cookieName);
